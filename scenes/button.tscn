@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cksmg5iq7hbi7"]
+
+[ext_resource type="Script" uid="uid://cq8hjg72r1d0c" path="res://scripts/Button.cs" id="1_3q610"]
+[ext_resource type="Shape2D" uid="uid://c2evtr4v5b2y5" path="res://resources/shape2d-button.tres" id="1_rhj8v"]
+
+[node name="Button" type="Area2D" unique_id=70452785]
+monitorable = false
+script = ExtResource("1_3q610")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=60494495]
+position = Vector2(0, 4)
+shape = ExtResource("1_rhj8v")
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
+[connection signal="body_exited" from="." to="." method="OnBodyExited"]
+[connection signal="mouse_entered" from="." to="." method="OnBodyEntered"]
+[connection signal="mouse_exited" from="." to="." method="OnBodyExited"]

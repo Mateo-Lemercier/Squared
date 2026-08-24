@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="ActionMap" format=3 uid="uid://boxhstq041ull"]
+
+[ext_resource type="InputEventKey" uid="uid://mpggxoxhi0dh" path="res://resources/actions/inputeventkey-q.tres" id="1_0bsfl"]
+[ext_resource type="Script" uid="uid://cyqs7ghd1n76l" path="res://scripts/ActionMap.cs" id="1_cyvt4"]
+[ext_resource type="Script" uid="uid://gb1uovypvxgp" path="res://scripts/Action.cs" id="1_q1npu"]
+[ext_resource type="InputEventKey" uid="uid://s8i1e6467tsb" path="res://resources/actions/inputeventkey-d.tres" id="3_tlr7j"]
+
+[sub_resource type="Resource" id="Resource_15a76"]
+script = ExtResource("1_q1npu")
+name = &"move-left"
+inputEvents = [ExtResource("1_0bsfl")]
+metadata/_custom_type_script = "uid://gb1uovypvxgp"
+
+[sub_resource type="Resource" id="Resource_pvuf6"]
+script = ExtResource("1_q1npu")
+name = &"move-right"
+inputEvents = [ExtResource("3_tlr7j")]
+metadata/_custom_type_script = "uid://gb1uovypvxgp"
+
+[sub_resource type="InputEventKey" id="InputEventKey_15a76"]
+device = -1
+keycode = 90
+unicode = 122
+
+[sub_resource type="Resource" id="Resource_3ibvo"]
+script = ExtResource("1_q1npu")
+name = &"jump"
+inputEvents = [SubResource("InputEventKey_15a76")]
+metadata/_custom_type_script = "uid://gb1uovypvxgp"
+
+[resource]
+script = ExtResource("1_cyvt4")
+actions = [SubResource("Resource_15a76"), SubResource("Resource_pvuf6"), SubResource("Resource_3ibvo")]
+metadata/_custom_type_script = "uid://cyqs7ghd1n76l"
