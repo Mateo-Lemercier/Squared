@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-[GlobalClass]
+[GlobalClass, Tool]
 public partial class Action : Resource
 {
     [Export] public StringName   name        = "";

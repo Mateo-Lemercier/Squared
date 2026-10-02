@@ -1,20 +1,28 @@
 [gd_resource type="Resource" script_class="ActionMap" format=3 uid="uid://boxhstq041ull"]
 
-[ext_resource type="InputEventKey" uid="uid://mpggxoxhi0dh" path="res://resources/actions/inputeventkey-q.tres" id="1_0bsfl"]
 [ext_resource type="Script" uid="uid://cyqs7ghd1n76l" path="res://scripts/ActionMap.cs" id="1_cyvt4"]
 [ext_resource type="Script" uid="uid://gb1uovypvxgp" path="res://scripts/Action.cs" id="1_q1npu"]
-[ext_resource type="InputEventKey" uid="uid://s8i1e6467tsb" path="res://resources/actions/inputeventkey-d.tres" id="3_tlr7j"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_at5ni"]
+device = -1
+keycode = 81
+unicode = 113
 
 [sub_resource type="Resource" id="Resource_15a76"]
 script = ExtResource("1_q1npu")
 name = &"move-left"
-inputEvents = [ExtResource("1_0bsfl")]
+inputEvents = [SubResource("InputEventKey_at5ni")]
 metadata/_custom_type_script = "uid://gb1uovypvxgp"
+
+[sub_resource type="InputEventKey" id="InputEventKey_0bsfl"]
+device = -1
+keycode = 68
+unicode = 100
 
 [sub_resource type="Resource" id="Resource_pvuf6"]
 script = ExtResource("1_q1npu")
 name = &"move-right"
-inputEvents = [ExtResource("3_tlr7j")]
+inputEvents = [SubResource("InputEventKey_0bsfl")]
 metadata/_custom_type_script = "uid://gb1uovypvxgp"
 
 [sub_resource type="InputEventKey" id="InputEventKey_15a76"]

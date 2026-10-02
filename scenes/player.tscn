@@ -3,13 +3,46 @@
 [ext_resource type="Shape2D" uid="uid://bfulb5gqyix4h" path="res://resources/shape2d-player.tres" id="1_g2els"]
 [ext_resource type="Script" uid="uid://c7h6hf7rnh1ya" path="res://scripts/Player.cs" id="1_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://c7uke6g351h1v" path="res://textures/player.png" id="2_qhqgy"]
+[ext_resource type="Script" uid="uid://dtqhhn4r7it4q" path="res://scripts/abilities/IntangibleNode.cs" id="4_dqkch"]
+[ext_resource type="Script" uid="uid://bsti0nuya4x05" path="res://scripts/abilities/ReJumpNode.cs" id="5_qlg0r"]
+[ext_resource type="Script" uid="uid://em8vjnqo2tln" path="res://scripts/abilities/ReverseGravityNode.cs" id="6_tuyoq"]
+[ext_resource type="Script" uid="uid://b6gqjnshbekl3" path="res://scripts/abilities/NoGravityNode.cs" id="8_smehm"]
 
 [node name="Player" type="CharacterBody2D" unique_id=543056590]
+z_index = 10
+collision_mask = 49
+platform_floor_layers = 115
 script = ExtResource("1_qhqgy")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=455308565]
 shape = ExtResource("1_g2els")
 
+[node name="DamageArea2D" type="Area2D" parent="." unique_id=1213364081]
+collision_layer = 0
+collision_mask = 384
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea2D" unique_id=1016185500]
+shape = ExtResource("1_g2els")
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=483109961]
 texture = ExtResource("2_qhqgy")
+
+[node name="IntangibleNode" type="Node" parent="." unique_id=1469411359]
+script = ExtResource("4_dqkch")
+metadata/_custom_type_script = "uid://dtqhhn4r7it4q"
+
+[node name="ReJumpNode" type="Node" parent="." unique_id=1144237277]
+script = ExtResource("5_qlg0r")
+metadata/_custom_type_script = "uid://bsti0nuya4x05"
+
+[node name="ReverseGravityNode" type="Node" parent="." unique_id=759648303]
+script = ExtResource("6_tuyoq")
+metadata/_custom_type_script = "uid://em8vjnqo2tln"
+
+[node name="NoGravityNode" type="Node" parent="." unique_id=1620503939]
+script = ExtResource("8_smehm")
+metadata/_custom_type_script = "uid://b6gqjnshbekl3"
+
+[connection signal="body_entered" from="DamageArea2D" to="." method="Die"]

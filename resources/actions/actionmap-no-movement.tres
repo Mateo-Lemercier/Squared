@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="ActionMap" format=3 uid="uid://cjyx3fgev3v3u"]
+
+[ext_resource type="Script" uid="uid://gb1uovypvxgp" path="res://scripts/Action.cs" id="1_5w1qk"]
+[ext_resource type="Script" uid="uid://cyqs7ghd1n76l" path="res://scripts/ActionMap.cs" id="2_0wdjx"]
+
+[sub_resource type="Resource" id="Resource_15a76"]
+script = ExtResource("1_5w1qk")
+name = &"move-left"
+metadata/_custom_type_script = "uid://gb1uovypvxgp"
+
+[sub_resource type="Resource" id="Resource_pvuf6"]
+script = ExtResource("1_5w1qk")
+name = &"move-right"
+metadata/_custom_type_script = "uid://gb1uovypvxgp"
+
+[sub_resource type="Resource" id="Resource_3ibvo"]
+script = ExtResource("1_5w1qk")
+name = &"jump"
+metadata/_custom_type_script = "uid://gb1uovypvxgp"
+
+[resource]
+script = ExtResource("2_0wdjx")
+actions = [SubResource("Resource_15a76"), SubResource("Resource_pvuf6"), SubResource("Resource_3ibvo")]
+metadata/_custom_type_script = "uid://cyqs7ghd1n76l"

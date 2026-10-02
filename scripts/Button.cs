@@ -1,11 +1,12 @@
 using Godot;
 using System;
 
+[Tool]
 public partial class Button : Area2D
 {
     [Signal] public delegate void SwitchEventHandler( uint group, Vector2 position, bool active );
 
-    [Export] private uint group = 0;
+    [Export] public uint group = 0;
     private uint pushedCount = 0;
 
 
@@ -18,7 +19,7 @@ public partial class Button : Area2D
         EmitSignal( SignalName.Switch, group, Position, true );
     }
 
-    private void OnBodyExited( Node2D body )  {
+    private void OnBodyExited( Node2D body ) {
         pushedCount--;
         if ( pushedCount != 0 ) return;
         EmitSignal( SignalName.Switch, group, Position, false );

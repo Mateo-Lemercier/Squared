@@ -4,11 +4,8 @@
 [ ] Shrink
 [ ] Grow
 
-[ ] Reverse Gravity ( Self )
-[ ] No Gravity ( Self )
-
-[ ] Intangible
-[ ] Button
+[x] Reverse Gravity ( Self )
+[x] No Gravity ( Self )
 
 [ ] Magnet +
 [ ] Magnet -
@@ -17,4 +14,9 @@
 [ ] Clone
 
 
+[x] Intangible
 [ ] Swim
+[ ] Blink ( Teleport to Saved Point )
+
+
+Timer for Clone ( dies after x seconds ) ?

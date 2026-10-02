@@ -1,62 +1,77 @@
 using Godot;
 using System;
 
+// 1   -122
+// 2   -174
+// 3   -213
+
+[Tool]
 public partial class Player : CharacterBody2D
 {
-    static public float JumpStrength = -122.0f;
+    static public float JumpStrength = -213.0f;
 
-    [Export] public Ability[] abilities = [];
+    [Export] public float GravityStrength { get; private set; } = 1.0f;
+    public float gravityStrength;
 
-    [Export] public float gravityStrength = 1.0f;
+    [Export] public float jumpHeight   = 1.0f;
 
-    [Export] public float jumpHeight   = 1.3f;
-
-    [Export] public float acceleration = 16.0f;
-    [Export] public float deceleration = 12.5f;
-    [Export] public float maxSpeed     = 80.0f;
+    [Export] public float Acceleration { get; private set; } = 16.0f;
+    [Export] public float Deceleration { get; private set; } = 12.5f;
+    [Export] public float MaxSpeed     { get; private set; } = 80.0f;
+    public float acceleration;
+    public float deceleration;
+    public float maxSpeed;
 
     public Vector2 velocity;
     public float   deltaF;
 
-    public bool    canJump = false;
+    private bool canJump = false;
+    public bool CanJump() => canJump;
 
 
     public override void _Ready() {
-        foreach ( Ability ability in abilities ) {
-            ability.Ready( this );
-        }
+        if ( Engine.IsEditorHint() ) return;
+
+        gravityStrength = GravityStrength;
+        acceleration    = Acceleration;
+        deceleration    = Deceleration;
+        maxSpeed        = MaxSpeed;
     }
 
     public override void _Process( double deltaD ) {
-        deltaF = (float)deltaD;
+        if ( Engine.IsEditorHint() ) return;
 
-        foreach ( Ability ability in abilities ) {
-            ability.Process( this );
-        }
+        deltaF = (float)deltaD;
     }
 
     public override void _PhysicsProcess( double deltaD ) {
-        // Rotate Velocity based on UpDirection for easier operations
-        velocity = new Vector2(
-            UpDirection.X * Velocity.Y - UpDirection.Y * Velocity.X,
-            -UpDirection.X * Velocity.X - UpDirection.Y * Velocity.Y
-        );
-        deltaF   = (float)deltaD;
+        if ( Engine.IsEditorHint() ) return;
 
-        foreach ( Ability ability in abilities ) {
-            ability.PhysicsProcess( this );
-        }
+        velocity = GetRotatedVelocity();
+        deltaF = (float)deltaD;
 
         HandleWalk();
         HandleJump();
         HandleGravity();
 
-        // Undo the rotation made to Velocity
+        SetRotatedVelocity( velocity );
+
+        MoveAndSlide();
+        HandleCollisions();
+    }
+
+    public Vector2 GetRotatedVelocity() {
+        return new Vector2(
+             UpDirection.X * Velocity.Y - UpDirection.Y * Velocity.X,
+            -UpDirection.X * Velocity.X - UpDirection.Y * Velocity.Y
+        );
+    }
+
+    public void SetRotatedVelocity( Vector2 velocity ) {
         Velocity = new Vector2(
             -UpDirection.X * velocity.Y - UpDirection.Y * velocity.X,
-            UpDirection.X * velocity.X - UpDirection.Y * velocity.Y
+             UpDirection.X * velocity.X - UpDirection.Y * velocity.Y
         );
-        MoveAndSlide();
     }
 
 
@@ -84,8 +99,23 @@ public partial class Player : CharacterBody2D
         velocity.Y = JumpStrength * jumpHeight;
     }
 
+
     private void HandleGravity() {
         if ( IsOnFloor() ) return;
         velocity.Y += gravityStrength * GetGravity().Length() * deltaF;
+    }
+
+
+    private void HandleCollisions() {
+        for ( int i = 0; i < GetSlideCollisionCount(); i++ ) {
+            // KinematicCollision2D collision = GetSlideCollision( i );
+            // if ( collision.GetCollider() is not RigidBody2D ) continue;
+            // ((RigidBody2D)collision.GetCollider()).ApplyCentralImpulse( -collision.GetNormal() * pushForce /* Velocity.Length() */ );
+        }
+    }
+
+
+    public void Die( Node2D body ) {
+        Modulate = Modulate.Inverted();
     }
 }

@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-[GlobalClass]
+[GlobalClass, Tool]
 public partial class ActionMap : Resource
 {
     [Export] public Action[] actions = [];

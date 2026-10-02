@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://dyxgrsbypnbo5"]
+
+[ext_resource type="Shape2D" uid="uid://codtlkppqkfxh" path="res://resources/shape2d-crate.tres" id="1_b66cd"]
+[ext_resource type="Script" uid="uid://bixwq60784h2" path="res://scripts/Crate.cs" id="1_kn6iu"]
+[ext_resource type="Texture2D" uid="uid://d217x06w0pxbw" path="res://textures/crates-atlas.png" id="2_dwt0d"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kn6iu"]
+atlas = ExtResource("2_dwt0d")
+region = Rect2(0, 0, 16, 48)
+
+[node name="Crate" type="RigidBody2D" unique_id=1581371849]
+z_index = 11
+collision_mask = 49
+lock_rotation = true
+script = ExtResource("1_kn6iu")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=974068640]
+shape = ExtResource("1_b66cd")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1560369918]
+collision_layer = 0
+collision_mask = 2
+input_pickable = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=495747684]
+scale = Vector2(0.95, 0.95)
+shape = ExtResource("1_b66cd")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1706132676]
+texture = SubResource("AtlasTexture_kn6iu")
+vframes = 3
+
+[connection signal="body_entered" from="Area2D" to="." method="OnBodyEntered"]
+[connection signal="body_exited" from="Area2D" to="." method="OnBodyExited"]
